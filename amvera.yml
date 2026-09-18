@@ -8,7 +8,7 @@ build:
   useCache: true
 run:
   scriptName: null
-  command: uvicorn src.main:app --host=0.0.0.0 --port=8080 --reload
+  command: uvicorn src.main:app --host=0.0.0.0 --port=8080 --reload --proxy-headers --forwarded-allow-ips='*'
   persistenceMount: /data
   containerPort: "8080"
   russianTrustedCa: false
