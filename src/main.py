@@ -7,7 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from src.db import get_db_session, engine, Base
-from src.models.click import Click
+from src.models.click import Click, index
 
 from src.schemas.click import ClickSchema
 
@@ -17,11 +17,12 @@ app = FastAPI(
     title='Click Tracking API'
 )
 
-#
-# @app.on_event("startup")
-# async def startup():
-#     async with engine.begin() as conn:
-#         await conn.run_sync(Base.metadata.create_all)
+
+@app.on_event("startup")
+async def startup():
+    async with engine.begin() as conn:
+        #await conn.run_sync(Base.metadata.create_all)
+        await conn.run_sync(index.create)
 
 
 @app.on_event("shutdown")

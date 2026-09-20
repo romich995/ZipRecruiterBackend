@@ -3,7 +3,7 @@ from datetime import datetime
 from typing import Optional
 
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy import UUID, String, DateTime
+from sqlalchemy import UUID, String, DateTime, Index
 
 from src.db import Base
 
@@ -40,3 +40,5 @@ class Click(Base):
         String(2000),
         nullable=True,
     )
+
+index = Index("idx_timestamp",Click.timestamp.desc())
